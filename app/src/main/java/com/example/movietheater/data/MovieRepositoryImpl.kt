@@ -14,6 +14,6 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMovieDetail(id: Int, apiKey: String): Response<MovieDetailResponse> {
-        TODO("Not yet implemented")
+        return movieService.getMovieDetail(id, apiKey)
     }
 }

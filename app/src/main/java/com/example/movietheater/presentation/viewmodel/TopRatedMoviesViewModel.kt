@@ -1,12 +1,11 @@
 package com.example.movietheater.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movietheater.api.MovieService
-import com.example.movietheater.api.TopRatedMoviesResult
+import com.example.movietheater.presentation.model.TopRatedMoviesResult
 import com.example.movietheater.usecase.MovieUseCase
 import com.example.movietheater.util.launchCatchError
 import kotlinx.coroutines.Dispatchers

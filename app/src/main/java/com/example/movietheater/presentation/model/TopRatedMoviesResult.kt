@@ -1,6 +1,4 @@
-package com.example.movietheater.api
-
-import com.example.movietheater.presentation.model.TopRatedMovieDataView
+package com.example.movietheater.presentation.model
 
 sealed class TopRatedMoviesResult {
     data class Success(val data: List<TopRatedMovieDataView>) : TopRatedMoviesResult()

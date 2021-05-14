@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movietheater.R
-import com.example.movietheater.api.TopRatedMoviesResult
+import com.example.movietheater.presentation.model.TopRatedMoviesResult
 import com.example.movietheater.di.DaggerTopRatedMoviesComponent
 import com.example.movietheater.presentation.MovieItemListener
 import com.example.movietheater.presentation.adapter.MoviesAdapter
