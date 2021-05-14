@@ -24,6 +24,7 @@ interface MovieService {
 
     companion object {
         private const val BASE_URL = "http://api.themoviedb.org/"
+        const val API_KEY = "7e8f60e325cd06e164799af1e317d7a7"
 
         fun create(): MovieService {
             val logger = HttpLoggingInterceptor()
