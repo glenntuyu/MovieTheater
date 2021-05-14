@@ -20,7 +20,7 @@ class MovieUseCase @Inject constructor(private val movieRepository: MovieReposit
         val response = movieRepository.getMovieDetail(id, apiKey)
 
         return if (response.isSuccessful) {
-            MovieDetailResult.Success(response.body()?.convertToMovieDetailDataView() ?: MovieDetailDataView())
+            MovieDetailResult.Success(response.body()?.convertToMovieDetailDataView())
         } else {
             MovieDetailResult.Error(response.message())
         }

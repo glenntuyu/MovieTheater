@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">MovieTheater</string>
 
-    <string name="header_title">Movie Theater</string>
-    <string name="no_result">No result</string>
+    <string name="main_header_title">Movie Theater</string>
+    <string name="error_result_text">Something went wrong!</string>
+
+    <string name="movie_detail_duration">Duration:</string>
+    <string name="movie_detail_rating">Rating:</string>
+    <string name="movie_detail_vote_count">Vote Count:</string>
+    <string name="movie_detail_vote_synopsis">Synopsis</string>
 </resources>

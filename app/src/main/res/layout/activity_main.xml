@@ -18,7 +18,7 @@
                 android:id="@+id/titleHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/header_title"
+                android:text="@string/main_header_title"
                 style="@style/Header_1"/>
 
     </androidx.appcompat.widget.Toolbar>
@@ -61,7 +61,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/no_result"
+        android:text="@string/error_result_text"
         android:visibility="gone"
         style="@style/Header_2"
         tools:visibility="visible"
