@@ -3,8 +3,9 @@ package com.example.movietheater.usecase
 import com.example.movietheater.api.TopRatedMoviesResult
 import com.example.movietheater.data.MovieRepository
 import com.example.movietheater.presentation.model.convertToTopRatedMovieList
+import javax.inject.Inject
 
-class MovieUseCase (private val movieRepository: MovieRepository) {
+class MovieUseCase @Inject constructor(private val movieRepository: MovieRepository) {
 
     suspend fun getTopRatedMovies(apiKey: String): TopRatedMoviesResult {
         val response = movieRepository.getTopRatedMovies(apiKey)

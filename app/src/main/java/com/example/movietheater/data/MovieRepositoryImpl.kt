@@ -4,8 +4,9 @@ import com.example.movietheater.api.MovieDetailResponse
 import com.example.movietheater.api.MovieService
 import com.example.movietheater.api.TopRatedMoviesResponse
 import retrofit2.Response
+import javax.inject.Inject
 
-class MovieRepositoryImpl(
+class MovieRepositoryImpl @Inject constructor(
     private val movieService: MovieService
 ): MovieRepository {
     override suspend fun getTopRatedMovies(apiKey: String): Response<TopRatedMoviesResponse> {

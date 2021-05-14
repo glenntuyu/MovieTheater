@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/topRatedMovieCard"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+        
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/moviePoster"
+            android:layout_width="90dp"
+            android:layout_height="135dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/movieTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textStyle="bold"
+            style="@style/Header_3"
+            tools:text="Movie Title"
+            app:layout_constraintStart_toEndOf="@id/moviePoster"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/movieReleaseDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            style="@style/Header_4"
+            tools:text="Movie Date"
+            app:layout_constraintStart_toEndOf="@id/moviePoster"
+            app:layout_constraintTop_toBottomOf="@+id/movieTitle"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/movieRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textStyle="bold"
+            style="@style/Body_3"
+            tools:text="Movie Rating"
+            app:layout_constraintStart_toEndOf="@id/moviePoster"
+            app:layout_constraintTop_toBottomOf="@+id/movieReleaseDate"
+            app:layout_constraintEnd_toStartOf="@id/movieVoteCount"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/movieVoteCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            style="@style/Body_3"
+            tools:text="Movie Vote Count"
+            app:layout_constraintStart_toEndOf="@id/movieRating"
+            app:layout_constraintTop_toBottomOf="@+id/movieReleaseDate"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/movieOverview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:maxLines="4"
+            android:ellipsize="end"
+            style="@style/Body_3"
+            tools:text="Movie OverView 1 \nMovie Overview 2 \nMovie Overview 3 \nMovie Overview 4"
+            app:layout_constraintStart_toEndOf="@id/moviePoster"
+            app:layout_constraintTop_toBottomOf="@+id/movieRating"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

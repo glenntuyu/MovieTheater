@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MovieTheater</string>
+
+    <string name="header_title">Movie Theater</string>
+    <string name="no_result">No result</string>
 </resources>

@@ -10,13 +10,14 @@ import com.example.movietheater.api.TopRatedMoviesResult
 import com.example.movietheater.usecase.MovieUseCase
 import com.example.movietheater.util.launchCatchError
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class TopRatedMoviesViewModel(
+class TopRatedMoviesViewModel @Inject constructor(
     private val movieUseCase: MovieUseCase,
 ): ViewModel() {
 
     private val _topRatedMoviesLiveData = MutableLiveData<TopRatedMoviesResult>()
-    val topRatedMovieLiveData: LiveData<TopRatedMoviesResult>
+    val topRatedMoviesLiveData: LiveData<TopRatedMoviesResult>
         get() = _topRatedMoviesLiveData
 
     fun getTopRatedMovies() {
@@ -24,8 +25,9 @@ class TopRatedMoviesViewModel(
             val data = movieUseCase.getTopRatedMovies(MovieService.API_KEY)
             _topRatedMoviesLiveData.postValue(data)
         }) {
-            Log.d("ViewModel", "Error fetching data")
-            Log.d("ViewModel", "${it.message}")
+            it.message?.let { message ->
+                _topRatedMoviesLiveData.postValue(TopRatedMoviesResult.Error(message))
+            }
         }
     }
 }
