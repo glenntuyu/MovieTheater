@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
         setContentView(R.layout.activity_main)
 
         initViewModel()
-        setContentView(R.layout.activity_main)
-        processTopRatedMovies()
+        observeTopRatedMoviesViewModel()
+        initAdapter()
         setListener()
         getTopRatedMovies()
     }
@@ -48,11 +48,6 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
             ViewModelProvider(this, topRatedMoviesViewModelFactory)
                 .get(TopRatedMoviesViewModel::class.java)
         }
-    }
-
-    private fun processTopRatedMovies() {
-        observeTopRatedMoviesViewModel()
-        initAdapter()
     }
 
     private fun observeTopRatedMoviesViewModel() {
