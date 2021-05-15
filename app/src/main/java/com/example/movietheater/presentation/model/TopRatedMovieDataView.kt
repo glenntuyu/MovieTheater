@@ -1,13 +1,17 @@
 package com.example.movietheater.presentation.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
+@Entity(tableName = "topRatedMovies")
 data class TopRatedMovieDataView(
-    val id: Int = 0,
-    val title: String = "",
-    val imageUrl: String = "",
-    val voteAverage: Float = 0.0f,
-    val voteCount: Int = 0,
-    val overview: String = "",
-    val releaseDate: Date = Date(),
+    @PrimaryKey @field:SerializedName("id") val id: Int = 0,
+    @field:SerializedName("title") val title: String = "",
+    @field:SerializedName("image_url") val imageUrl: String = "",
+    @field:SerializedName("vote_average") val voteAverage: Float = 0.0f,
+    @field:SerializedName("vote_count") val voteCount: Int = 0,
+    @field:SerializedName("overview") val overview: String = "",
+    @field:SerializedName("release_date") val releaseDate: Date = Date(),
 )

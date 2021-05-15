@@ -1,10 +1,11 @@
 package com.example.movietheater.data
 
-import com.example.movietheater.api.MovieDetailResponse
-import com.example.movietheater.api.TopRatedMoviesResponse
-import retrofit2.Response
+import androidx.paging.PagingData
+import com.example.movietheater.presentation.model.MovieDetailResult
+import com.example.movietheater.presentation.model.TopRatedMovieDataView
+import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
-    suspend fun getTopRatedMovies(apiKey: String): Response<TopRatedMoviesResponse>
-    suspend fun getMovieDetail(id: Int, apiKey: String): Response<MovieDetailResponse>
+    fun getTopRatedMovies(): Flow<PagingData<TopRatedMovieDataView>>
+    suspend fun getMovieDetail(id: Int): MovieDetailResult
 }

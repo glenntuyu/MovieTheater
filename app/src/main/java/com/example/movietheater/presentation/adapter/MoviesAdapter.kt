@@ -1,13 +1,13 @@
 package com.example.movietheater.presentation.adapter
 
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movietheater.presentation.MovieItemListener
 import com.example.movietheater.presentation.model.TopRatedMovieDataView
 
-class MoviesAdapter(private val listener: MovieItemListener): ListAdapter<TopRatedMovieDataView, RecyclerView.ViewHolder>(MOVIE_COMPARATOR) {
+class MoviesAdapter(private val listener: MovieItemListener): PagingDataAdapter<TopRatedMovieDataView, RecyclerView.ViewHolder>(MOVIE_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedMovieViewHolder {
         return TopRatedMovieViewHolder.create(parent, listener)

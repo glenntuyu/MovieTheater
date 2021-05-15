@@ -1,23 +1,25 @@
 package com.example.movietheater.presentation.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movietheater.R
-import com.example.movietheater.presentation.model.TopRatedMoviesResult
 import com.example.movietheater.di.DaggerTopRatedMoviesComponent
 import com.example.movietheater.presentation.MovieItemListener
 import com.example.movietheater.presentation.adapter.MoviesAdapter
-import com.example.movietheater.presentation.model.TopRatedMovieDataView
 import com.example.movietheater.presentation.viewmodel.TopRatedMoviesViewModel
 import com.example.movietheater.presentation.viewmodel.TopRatedMoviesViewModelFactory
 import com.example.movietheater.util.MOVIE_ID
 import com.example.movietheater.util.gone
 import com.example.movietheater.util.visible
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MovieItemListener {
@@ -29,17 +31,18 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
 
     private var adapter: MoviesAdapter? = null
 
+    private var getMoviesJob: Job? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        val component = DaggerTopRatedMoviesComponent.builder().build()
+        val component = DaggerTopRatedMoviesComponent.factory().create(applicationContext)
         component.inject(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initViewModel()
-        observeTopRatedMoviesViewModel()
         initAdapter()
-        setListener()
+        setRefreshButtonListener()
         getTopRatedMovies()
     }
 
@@ -48,25 +51,6 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
             ViewModelProvider(this, topRatedMoviesViewModelFactory)
                 .get(TopRatedMoviesViewModel::class.java)
         }
-    }
-
-    private fun observeTopRatedMoviesViewModel() {
-        topRatedMoviesViewModel.topRatedMoviesLiveData.observe(this) { result ->
-            when (result) {
-                is TopRatedMoviesResult.Success -> {
-                    submitList(result.data)
-                    showEmptyList(result.data.isEmpty())
-                }
-                is TopRatedMoviesResult.Error -> {
-                    showEmptyList(true)
-                    toastError(result.error)
-                }
-            }
-        }
-    }
-
-    private fun submitList(data: List<TopRatedMovieDataView>) {
-        adapter?.submitList(data)
     }
 
     private fun showEmptyList(show: Boolean) {
@@ -100,17 +84,12 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
         noResultText?.gone()
     }
 
-    private fun toastError(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
     private fun initAdapter() {
         adapter = MoviesAdapter(this)
-        recyclerView?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter = adapter
     }
 
-    private fun setListener() {
+    private fun setRefreshButtonListener() {
         refreshButton?.setOnClickListener {
             getTopRatedMovies()
         }
@@ -120,7 +99,17 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
         showLoading()
         hideRecyclerView()
         hideNoResultView()
-        topRatedMoviesViewModel.getTopRatedMovies()
+        getMovies()
+    }
+
+    private fun getMovies() {
+        getMoviesJob?.cancel()
+        getMoviesJob = lifecycleScope.launch {
+            topRatedMoviesViewModel.getTopRatedMovies().collectLatest {
+                showEmptyList(false)
+                adapter?.submitData(it)
+            }
+        }
     }
 
     private fun showLoading() {

@@ -13,8 +13,9 @@ interface MovieService {
 
     @GET("3/movie/top_rated")
     suspend fun getTopRatedMovies(
+        @Query("page") page: Int,
         @Query("api_key") apiKey: String,
-    ): Response<TopRatedMoviesResponse>
+    ): TopRatedMoviesResponse
 
     @GET("3/movie/{id}")
     suspend fun getMovieDetail(

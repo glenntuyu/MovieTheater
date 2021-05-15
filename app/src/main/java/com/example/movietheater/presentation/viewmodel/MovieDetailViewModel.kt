@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movietheater.api.MovieService
 import com.example.movietheater.presentation.model.MovieDetailResult
 import com.example.movietheater.usecase.MovieUseCase
 import com.example.movietheater.util.launchCatchError
@@ -21,7 +20,7 @@ class MovieDetailViewModel @Inject constructor(
 
     fun getMovieDetail(id: Int) {
         viewModelScope.launchCatchError(Dispatchers.IO, {
-            val data = movieUseCase.getMovieDetail(id, MovieService.API_KEY)
+            val data = movieUseCase.getMovieDetail(id)
             _movieDetailLiveData.postValue(data)
         }) {
             it.message?.let { message ->

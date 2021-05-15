@@ -26,7 +26,7 @@ class MovieDetailActivity : AppCompatActivity() {
     private var movieId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val component = DaggerMovieDetailComponent.builder().build()
+        val component = DaggerMovieDetailComponent.factory().create(applicationContext)
         component.inject(this)
 
         super.onCreate(savedInstanceState)
