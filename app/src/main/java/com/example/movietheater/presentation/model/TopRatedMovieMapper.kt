@@ -6,7 +6,7 @@ fun List<TopRatedMoviesResponse.Movie>.convertToTopRatedMovieList(): List<TopRat
     val list = ArrayList<TopRatedMovieDataView>()
     for(item in this) {
         val movie = TopRatedMovieDataView(
-            id = item.id,
+            movieId = item.movieId,
             title = item.title,
             imageUrl = item.imageUrl,
             voteAverage = item.voteAverage,

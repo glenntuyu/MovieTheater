@@ -12,7 +12,7 @@ data class TopRatedMoviesResponse(
 ) {
     data class Movie(
         @SerializedName("id")
-        val id: Int = 0,
+        val movieId: Int = 0,
 
         @SerializedName("title")
         val title: String = "",

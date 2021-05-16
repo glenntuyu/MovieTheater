@@ -53,7 +53,7 @@ class TopRatedMovieViewHolder(itemView: View, private val listener: MovieItemLis
 
     private fun bindListener(data: TopRatedMovieDataView) {
         itemView.topRatedMovieCard?.setOnClickListener {
-            listener.onMovieItemClicked(data.id)
+            listener.onMovieItemClicked(data.movieId)
         }
     }
 

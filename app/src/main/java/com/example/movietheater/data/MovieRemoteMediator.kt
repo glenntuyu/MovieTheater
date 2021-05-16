@@ -73,7 +73,7 @@ class MovieRemoteMediator(
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (endOfPaginationReached) null else page + 1
                 val keys = movies.map {
-                    RemoteKeys(movieId = it.id, prevKey = prevKey, nextKey = nextKey)
+                    RemoteKeys(movieId = it.movieId, prevKey = prevKey, nextKey = nextKey)
                 }
                 topRatedMovieDatabase.remoteKeysDao().insertAll(keys)
                 topRatedMovieDatabase.moviesDao().insertAll(movies)
@@ -92,7 +92,7 @@ class MovieRemoteMediator(
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { movie ->
                 // Get the remote keys of the last item retrieved
-                topRatedMovieDatabase.remoteKeysDao().remoteKeysMovieId(movie.id)
+                topRatedMovieDatabase.remoteKeysDao().remoteKeysMovieId(movie.movieId)
             }
     }
 
@@ -102,7 +102,7 @@ class MovieRemoteMediator(
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { movie ->
                 // Get the remote keys of the first items retrieved
-                topRatedMovieDatabase.remoteKeysDao().remoteKeysMovieId(movie.id)
+                topRatedMovieDatabase.remoteKeysDao().remoteKeysMovieId(movie.movieId)
             }
     }
 
@@ -112,7 +112,7 @@ class MovieRemoteMediator(
         // The paging library is trying to load data after the anchor position
         // Get the item closest to the anchor position
         return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?.id?.let { movieId ->
+            state.closestItemToPosition(position)?.movieId?.let { movieId ->
                 topRatedMovieDatabase.remoteKeysDao().remoteKeysMovieId(movieId)
             }
         }

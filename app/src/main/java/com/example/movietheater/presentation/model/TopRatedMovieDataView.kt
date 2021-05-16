@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity(tableName = "topRatedMovies")
 data class TopRatedMovieDataView(
-    @PrimaryKey @field:SerializedName("id") val id: Int = 0,
+    @PrimaryKey @field:SerializedName("id") val movieId: Int = 0,
     @field:SerializedName("title") val title: String = "",
     @field:SerializedName("image_url") val imageUrl: String = "",
     @field:SerializedName("vote_average") val voteAverage: Float = 0.0f,

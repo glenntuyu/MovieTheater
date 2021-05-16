@@ -21,7 +21,7 @@ class MoviesAdapter(private val listener: MovieItemListener): PagingDataAdapter<
     companion object {
         private val MOVIE_COMPARATOR = object : DiffUtil.ItemCallback<TopRatedMovieDataView>() {
             override fun areItemsTheSame(oldItem: TopRatedMovieDataView, newItem: TopRatedMovieDataView): Boolean =
-                oldItem.id == newItem.id
+                oldItem.movieId == newItem.movieId
 
             override fun areContentsTheSame(oldItem: TopRatedMovieDataView, newItem: TopRatedMovieDataView): Boolean =
                 oldItem == newItem
