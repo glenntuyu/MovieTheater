@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
         setContentView(R.layout.activity_main)
 
         initViewModel()
-        observeTopRatedMoviesViewModel()
+        observeLiveData()
         initAdapter()
         setRefreshButtonListener()
         getTopRatedMovies()
@@ -46,11 +46,28 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
         }
     }
 
-    private fun observeTopRatedMoviesViewModel() {
+    private fun observeLiveData() {
+        observeTopRatedMoviesLiveData()
+        observeClickMovieItemEventLiveData()
+    }
+
+    private fun observeTopRatedMoviesLiveData() {
         topRatedMoviesViewModel.topRatedMoviesLiveData.observe(this) {
                 showEmptyList(false)
                 adapter?.submitData(lifecycle, it)
         }
+    }
+
+    private fun observeClickMovieItemEventLiveData() {
+        topRatedMoviesViewModel.clickMovieItemEventLiveData.observe(this) {
+            moveToMovieDetailActivity(it)
+        }
+    }
+
+    private fun moveToMovieDetailActivity(id: Int) {
+        val intent = Intent(this, MovieDetailActivity::class.java)
+        intent.putExtra(MOVIE_ID, id)
+        startActivity(intent)
     }
 
     private fun showEmptyList(show: Boolean) {
@@ -113,8 +130,6 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
     }
 
     override fun onMovieItemClicked(id: Int) {
-        val intent = Intent(this, MovieDetailActivity::class.java)
-        intent.putExtra(MOVIE_ID, id)
-        startActivity(intent)
+        topRatedMoviesViewModel.onMovieItemClicked(id)
     }
 }

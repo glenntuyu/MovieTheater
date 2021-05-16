@@ -20,11 +20,19 @@ class TopRatedMoviesViewModel @Inject constructor(
     val topRatedMoviesLiveData: LiveData<PagingData<TopRatedMovieDataView>>
         get() = _topRatedMoviesLiveData
 
+    private val _clickMovieItemEventLiveData = MutableLiveData<Int>()
+    val clickMovieItemEventLiveData: LiveData<Int>
+        get() = _clickMovieItemEventLiveData
+
     fun getTopRatedMovies() {
         viewModelScope.launch(Dispatchers.IO) {
             movieUseCase.getTopRatedMovies().collectLatest {
                 _topRatedMoviesLiveData.postValue(it)
             }
         }
+    }
+
+    fun onMovieItemClicked(id: Int) {
+        _clickMovieItemEventLiveData.postValue(id)
     }
 }

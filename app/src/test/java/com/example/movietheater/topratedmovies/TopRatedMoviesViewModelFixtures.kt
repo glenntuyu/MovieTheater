@@ -8,8 +8,10 @@ import com.example.movietheater.presentation.model.convertToTopRatedMovieList
 import com.example.movietheater.presentation.viewmodel.TopRatedMoviesViewModel
 import com.example.movietheater.usecase.MovieUseCase
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -31,6 +33,8 @@ internal open class TopRatedMoviesViewModelFixtures {
 
     protected val topRatedMoviesResponseJson = "top_rated_movies_response.json"
     protected val topRatedMoviesResponse = topRatedMoviesResponseJson.jsonToObject<TopRatedMoviesResponse>()
+    protected val moreTopRatedMoviesResponseJson = "more_top_rated_movies_response.json"
+    protected val moreTopRatedMoviesResponse = moreTopRatedMoviesResponseJson.jsonToObject<TopRatedMoviesResponse>()
 
     @Before
     open fun setUp() {
@@ -54,6 +58,14 @@ internal open class TopRatedMoviesViewModelFixtures {
         coEvery {
             movieUseCase.getTopRatedMovies()
         } returns flowOf(data)
+    }
+
+    protected fun `Given API service will be successful`(topRatedMoviesResponse: TopRatedMoviesResponse, moreTopRatedMoviesResponse: TopRatedMoviesResponse) {
+        val data = PagingData.from(topRatedMoviesResponse.movies.convertToTopRatedMovieList())
+        val data2 = PagingData.from(moreTopRatedMoviesResponse.movies.convertToTopRatedMovieList())
+        coEvery {
+            movieUseCase.getTopRatedMovies()
+        } returns flowOf(data) andThen flowOf(data2)
     }
 
     protected fun `Given API call will fail`() {
