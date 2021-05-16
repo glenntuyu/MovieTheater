@@ -8,7 +8,7 @@ data class MovieDetailResponse(
     val isAdult: Boolean = false,
 
     @SerializedName("backdrop_path")
-    val backdropPath: String = "",
+    val backdropPath: String? = null,
 
     @SerializedName("title")
     val title: String = "",

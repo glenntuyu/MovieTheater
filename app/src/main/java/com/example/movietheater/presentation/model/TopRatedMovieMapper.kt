@@ -8,7 +8,7 @@ fun List<TopRatedMoviesResponse.Movie>.convertToTopRatedMovieList(): List<TopRat
         val movie = TopRatedMovieDataView(
             movieId = item.movieId,
             title = item.title,
-            imageUrl = item.imageUrl,
+            imageUrl = item.imageUrl ?: "",
             voteAverage = item.voteAverage,
             voteCount = item.voteCount,
             overview = item.overview,

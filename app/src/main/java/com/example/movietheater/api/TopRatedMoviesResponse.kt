@@ -18,7 +18,7 @@ data class TopRatedMoviesResponse(
         val title: String = "",
 
         @SerializedName("poster_path")
-        val imageUrl: String = "",
+        val imageUrl: String? = null,
 
         @SerializedName("vote_average")
         val voteAverage: Float = 0.0f,

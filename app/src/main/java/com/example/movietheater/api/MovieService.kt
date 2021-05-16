@@ -11,7 +11,7 @@ import retrofit2.http.Query
 
 interface MovieService {
 
-    @GET("3/movie/top_rated")
+    @GET("3/discover/movie?include_video=false&without_genres=99,10755&vote_count.gte=75&sort_by=vote_count.desc")
     suspend fun getTopRatedMovies(
         @Query("page") page: Int,
         @Query("api_key") apiKey: String,

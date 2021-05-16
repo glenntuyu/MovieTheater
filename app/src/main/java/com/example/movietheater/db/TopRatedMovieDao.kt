@@ -15,7 +15,7 @@ interface TopRatedMovieDao {
 
     @Query(
         "SELECT * FROM topRatedMovies " +
-            "ORDER BY voteAverage DESC, title ASC"
+            "ORDER BY voteCount DESC"
     )
     fun getMovies(): PagingSource<Int, TopRatedMovieDataView>
 
