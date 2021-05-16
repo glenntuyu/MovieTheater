@@ -1,4 +1,4 @@
-package com.example.movietheater
+package com.example.movietheater.utils
 
 import com.google.gson.Gson
 import java.io.File

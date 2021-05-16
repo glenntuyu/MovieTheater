@@ -3,7 +3,7 @@ package com.example.movietheater.topratedmovies
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingData
 import com.example.movietheater.api.TopRatedMoviesResponse
-import com.example.movietheater.jsonToObject
+import com.example.movietheater.utils.jsonToObject
 import com.example.movietheater.presentation.model.convertToTopRatedMovieList
 import com.example.movietheater.presentation.viewmodel.TopRatedMoviesViewModel
 import com.example.movietheater.usecase.MovieUseCase

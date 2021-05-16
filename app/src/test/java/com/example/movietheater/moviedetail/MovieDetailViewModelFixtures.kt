@@ -2,7 +2,7 @@ package com.example.movietheater.moviedetail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.movietheater.api.MovieDetailResponse
-import com.example.movietheater.jsonToObject
+import com.example.movietheater.utils.jsonToObject
 import com.example.movietheater.presentation.model.MovieDetailResult
 import com.example.movietheater.presentation.model.convertToMovieDetailDataView
 import com.example.movietheater.presentation.viewmodel.MovieDetailViewModel

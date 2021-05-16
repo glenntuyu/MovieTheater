@@ -1,10 +1,10 @@
 package com.example.movietheater.topratedmovies
 
 import androidx.paging.PagingData
-import com.example.movietheater.getOrAwaitValue
-import com.example.movietheater.observerOnChangedNotCalled
+import com.example.movietheater.utils.getOrAwaitValue
+import com.example.movietheater.utils.observerOnChangedNotCalled
 import com.example.movietheater.presentation.model.TopRatedMovieDataView
-import com.example.movietheater.shouldBeInstanceOf
+import com.example.movietheater.utils.shouldBeInstanceOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test

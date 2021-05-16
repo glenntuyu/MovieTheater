@@ -1,4 +1,4 @@
-package com.example.movietheater
+package com.example.movietheater.utils
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer

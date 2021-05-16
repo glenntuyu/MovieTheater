@@ -1,11 +1,11 @@
 package com.example.movietheater.moviedetail
 
 import com.example.movietheater.api.MovieDetailResponse
-import com.example.movietheater.getOrAwaitValue
+import com.example.movietheater.utils.getOrAwaitValue
 import com.example.movietheater.presentation.model.MovieDetailDataView
 import com.example.movietheater.presentation.model.MovieDetailResult
-import com.example.movietheater.shouldBe
-import com.example.movietheater.shouldBeInstanceOf
+import com.example.movietheater.utils.shouldBe
+import com.example.movietheater.utils.shouldBeInstanceOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test

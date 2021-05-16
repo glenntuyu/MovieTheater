@@ -1,4 +1,4 @@
-package com.example.movietheater
+package com.example.movietheater.utils
 
 internal infix fun Any?.shouldBe(expectedValue: Any?) {
     if (this != expectedValue) {
