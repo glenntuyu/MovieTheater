@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MovieTheater</string>
 
-    <string name="main_header_title">Movie Theater</string>
+    <string name="main_header_title">Movie Theater - Now Showing</string>
     <string name="error_result_text">Something went wrong!</string>
 
     <string name="movie_detail_duration">Duration:</string>
