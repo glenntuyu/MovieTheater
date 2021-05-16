@@ -2,11 +2,8 @@ package com.example.movietheater.presentation.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movietheater.R
 import com.example.movietheater.di.DaggerTopRatedMoviesComponent
 import com.example.movietheater.presentation.MovieItemListener
@@ -17,9 +14,6 @@ import com.example.movietheater.util.MOVIE_ID
 import com.example.movietheater.util.gone
 import com.example.movietheater.util.visible
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MovieItemListener {
@@ -31,8 +25,6 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
 
     private var adapter: MoviesAdapter? = null
 
-    private var getMoviesJob: Job? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         val component = DaggerTopRatedMoviesComponent.factory().create(applicationContext)
         component.inject(this)
@@ -41,6 +33,7 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
         setContentView(R.layout.activity_main)
 
         initViewModel()
+        observeTopRatedMoviesViewModel()
         initAdapter()
         setRefreshButtonListener()
         getTopRatedMovies()
@@ -50,6 +43,13 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
         topRatedMoviesViewModel = run {
             ViewModelProvider(this, topRatedMoviesViewModelFactory)
                 .get(TopRatedMoviesViewModel::class.java)
+        }
+    }
+
+    private fun observeTopRatedMoviesViewModel() {
+        topRatedMoviesViewModel.topRatedMoviesLiveData.observe(this) {
+                showEmptyList(false)
+                adapter?.submitData(lifecycle, it)
         }
     }
 
@@ -99,17 +99,7 @@ class MainActivity : AppCompatActivity(), MovieItemListener {
         showLoading()
         hideRecyclerView()
         hideNoResultView()
-        getMovies()
-    }
-
-    private fun getMovies() {
-        getMoviesJob?.cancel()
-        getMoviesJob = lifecycleScope.launch {
-            topRatedMoviesViewModel.getTopRatedMovies().collectLatest {
-                showEmptyList(false)
-                adapter?.submitData(it)
-            }
-        }
+        topRatedMoviesViewModel.getTopRatedMovies()
     }
 
     private fun showLoading() {

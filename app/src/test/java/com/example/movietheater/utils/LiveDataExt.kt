@@ -29,3 +29,21 @@ fun <T> LiveData<T>.getOrAwaitValue(
     @Suppress("UNCHECKED_CAST")
     return data as T
 }
+
+fun <T> LiveData<T>.observerOnChangedNotCalled(
+    time: Long = 2,
+    timeUnit: TimeUnit = TimeUnit.SECONDS
+): Boolean {
+    val latch = CountDownLatch(1)
+    val observer = Observer<T> { latch.countDown() }
+
+    this.observeForever(observer)
+
+    return if (!latch.await(time, timeUnit)) {
+        this.removeObserver(observer)
+        true
+    } else {
+        this.removeObserver(observer)
+        false
+    }
+}

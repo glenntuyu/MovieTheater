@@ -1,15 +1,20 @@
-package com.example.movietheater
+package com.example.movietheater.moviedetail
 
 import com.example.movietheater.api.MovieDetailResponse
+import com.example.movietheater.getOrAwaitValue
 import com.example.movietheater.presentation.model.MovieDetailDataView
 import com.example.movietheater.presentation.model.MovieDetailResult
+import com.example.movietheater.shouldBe
+import com.example.movietheater.shouldBeInstanceOf
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 internal class HandleGetMovieDetailTest: MovieDetailViewModelFixtures() {
 
     @Test
-    fun `Error network when getting movie detial`() {
+    fun `Error network when getting movie detail`() {
         `Given API call will fail`()
         `When view call getTopRatedMovies`()
         `Then verify response error`()

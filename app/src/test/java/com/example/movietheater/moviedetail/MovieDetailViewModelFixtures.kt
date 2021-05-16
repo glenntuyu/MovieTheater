@@ -1,14 +1,14 @@
-package com.example.movietheater
+package com.example.movietheater.moviedetail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.movietheater.api.MovieDetailResponse
+import com.example.movietheater.jsonToObject
 import com.example.movietheater.presentation.model.MovieDetailResult
 import com.example.movietheater.presentation.model.convertToMovieDetailDataView
 import com.example.movietheater.presentation.viewmodel.MovieDetailViewModel
 import com.example.movietheater.usecase.MovieUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
 
